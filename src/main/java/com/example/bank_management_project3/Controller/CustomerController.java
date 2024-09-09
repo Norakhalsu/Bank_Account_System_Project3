@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
     private final CustomerService customerService;
 
-        @PostMapping("/add")// ALL
+         @PostMapping("/add")// ALL
         public ResponseEntity createCustomer(@RequestBody CustomerDTO customer) {
              customerService.createCustomer(customer);
             return ResponseEntity.status(200).body("Customer created");
@@ -46,6 +46,12 @@ public class CustomerController {
        public ResponseEntity getCustomerById(@PathVariable Integer customerId) {
         return ResponseEntity.status(200).body(customerService.getCustomerById(customerId));
       }
+
+    @GetMapping("/list-accounts")// list user's accounts , CUSTOMER
+    public ResponseEntity getCustomerAccounts(@AuthenticationPrincipal User user) {
+        Set<Account> customerAccount = customerService.getUserAccounts(user.getId());
+        return ResponseEntity.ok(customerAccount);
+    }
 
 
 
