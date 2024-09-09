@@ -16,18 +16,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
 
-
-    // ALL
-    public void createUser(User user) {
-       userRepository.save(user);
-    }
-
-
      // return all users  , ADMIN
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
 
     // USER
     public void updateUser(Integer userId, User updatedUser) {
@@ -60,19 +52,5 @@ public class UserService {
         }
         return user;
     }
-
-
-
-   // get All User Accounts , USER
-    public Set<Account> getUserAccounts(Integer userId) {
-        Set<Account> userAccounts = (Set<Account>) accountRepository.findAccountsByCustomerId(userId);
-        if (userAccounts.isEmpty()) {
-            throw new ApiException("No accounts found for the user");
-        }
-        return userAccounts;
-    }
-
-
-
 
 }
