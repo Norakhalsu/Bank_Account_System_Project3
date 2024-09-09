@@ -20,12 +20,6 @@ public class UserController {
         private final UserService userService;
         private final AccountService accountService;
 
-        @PostMapping("/add")//ALL
-        public ResponseEntity createUser(@RequestBody User user) {
-            userService.createUser(user);
-            return ResponseEntity.status(200).body("User Created");
-        }
-
 
         @GetMapping("/get-all")// ADMIN
         public ResponseEntity getAllUsers() {
@@ -48,14 +42,6 @@ public class UserController {
         public ResponseEntity getUserById(@PathVariable Integer userId) {
             return ResponseEntity.status(200).body(userService.getUserById(userId));
         }
-
-
-    @GetMapping("/list")// list user's accounts , USER
-    public ResponseEntity getUserAccounts(@AuthenticationPrincipal Integer userId) {
-        Set<Account> userAccounts = userService.getUserAccounts(userId);
-        return ResponseEntity.ok(userAccounts);
-    }
-
 
     @GetMapping("/logout")
     public ResponseEntity logout() {
