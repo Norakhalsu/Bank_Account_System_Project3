@@ -72,7 +72,14 @@ public class CustomerService {
         return customer;
     }
 
-
+  // get All User Accounts , USER
+    public Set<Account> getUserAccounts(Integer userId) {
+        Set<Account> userAccounts = (Set<Account>) accountRepository.findAccountsByCustomerId(userId);
+        if (userAccounts.isEmpty()) {
+            throw new ApiException("No accounts found for the user");
+        }
+        return userAccounts;
+    }
 
 
 }
