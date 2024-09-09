@@ -37,30 +37,40 @@ public class SecurityConfig {
                     .and()
                     .authenticationProvider(daoAuthenticationProvider()).authorizeRequests()
 
-                    // user controller
-                    .requestMatchers("/api/v1/user/add").permitAll()
+
+                  
+                // user controller
                     .requestMatchers("/api/v1/user/get-all").hasAuthority("ADMIN")
-                    //.requestMatchers("/api/v1/user/update").hasAuthority("USER")
+                    .requestMatchers("/api/v1/user/update").hasAuthority("USER")
                     .requestMatchers("/api/v1/user/delete/{userId}").hasAuthority("ADMIN")
                     .requestMatchers("/api/v1/user/get-user/{userId}").hasAuthority("ADMIN")
-                    //.requestMatchers("api/v1/user/list/").hasAuthority("USER")
 
                     // Employee
                     .requestMatchers("/api/v1/employee/add").permitAll()
                     .requestMatchers("/api/v1/employee/get-all").hasAuthority("ADMIN")// get all
-                   // .requestMatchers("/api/v1/employee/update/{employeeId}").hasAuthority("EMPLOYEE")
-                    //.requestMatchers("/api/v1/employee/delete/{employeeId}").hasAuthority("EMPLOYEE")
+                    .requestMatchers("/api/v1/employee/update/{employeeId}").hasAuthority("EMPLOYEE")
+                    .requestMatchers("/api/v1/employee/delete/{employeeId}").hasAuthority("EMPLOYEE")
                     .requestMatchers("/api/v1/employee/get-employee/{employeeId}").hasAuthority("ADMIN")//get one employee
 
                     // Customer
                     .requestMatchers("/api/v1/customer/add").permitAll()
                     .requestMatchers("/api/v1/customer/get-all").hasAuthority("ADMIN")
-                    //.requestMatchers("/api/v1/customer/update").hasAuthority("CUSTOMER")
-                    //.requestMatchers("/api/v1/customer/delete").hasAuthority("Customer")
+                    .requestMatchers("/api/v1/customer/update").hasAuthority("CUSTOMER")
+                    .requestMatchers("/api/v1/customer/delete").hasAuthority("Customer")
                     .requestMatchers("/api/v1/customer/{customerId}").hasAuthority("ADMIN")
+                    .requestMatchers("api/v1/customer/list-accounts").hasAuthority("CUSTOMER")
+
 
                     // Account
+                    .requestMatchers("/api/v1/account/add").hasAuthority("CUSTOMER")
                     .requestMatchers("/api/v1/account/get-all").hasAuthority("ADMIN")
+                    .requestMatchers("/api/v1/account/update/{accountId}").hasAuthority("CUSTOMER")
+                    .requestMatchers("/api/v1/account/delete/{accountId}").hasAuthority("CUSTOMER")
+                    .requestMatchers("/api/v1/account/activate/{accountId}").hasAuthority("ADMIN")
+                    .requestMatchers("/api/v1/account/details/{accountId}").hasAuthority("CUSTOMER")
+                    .requestMatchers("/api/v1/account/deposit/{accountId}").hasAuthority("CUSTOMER")
+                    .requestMatchers("/api/v1/account/withdraw/{accountId}").hasAuthority("CUSTOMER")
+                    .requestMatchers("/api/v1/account/transfer/{accountId}").hasAuthority("CUSTOMER")
                     .requestMatchers("/api/v1/account/block/{accountId}").hasAuthority( "ADMIN")
                     .anyRequest().authenticated()
                     .and()
@@ -73,6 +83,9 @@ public class SecurityConfig {
             return http.build();
         }
 
+
+
+      
 
     }
 
