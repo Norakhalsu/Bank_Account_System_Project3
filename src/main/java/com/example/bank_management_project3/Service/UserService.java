@@ -14,7 +14,7 @@ import java.util.Set;
 @Service@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final AccountRepository accountRepository;
+   // private final AccountRepository accountRepository;
 
      // return all users  , ADMIN
     public List<User> getAllUsers() {
